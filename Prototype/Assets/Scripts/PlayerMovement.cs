@@ -20,8 +20,8 @@ public class PlayerMovement : MonoBehaviour
     public static float MaxFloatValue = 100;
     public static float FloatValue;
 
-    public static bool controllable = false;
-    public static bool abilities = false;
+    public static bool controllable = true;
+    public static bool abilities = true;
 
     public float dashSpeed;
     private float dashTime;
@@ -48,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log("controllable" + controllable);
+        //Debug.Log("abilities" + abilities);
         if (controllable == true) {
             Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
             transform.position += movement * Time.deltaTime * moveSpeed;

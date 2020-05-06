@@ -8,9 +8,26 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Start()
     {
-    //TriggerDialogue();
+        //TriggerDialogue();
     }
-    public void TriggerDialogue() {
+    public void TriggerDialogue()
+    {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+    }
+    private void Update()
+    {
+        if (dialogue.trigger == true)
+        {
+            dialogue.trigger = false;
+            StartCoroutine(TriggerCoroutine());
+        }
+    }
+
+    public IEnumerator TriggerCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        TriggerDialogue();
+
+
     }
 }

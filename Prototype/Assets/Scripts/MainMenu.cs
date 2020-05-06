@@ -8,11 +8,16 @@ public class MainMenu : MonoBehaviour
 {
     public Animator animator;
 
+
     public void SceneLoad(int Scene_Number)
     {
         SceneManager.LoadScene(Scene_Number);
+        if(Scene_Number >= 2) 
+        {
+            PlayerMovement.controllable = true;
+        }
     }
-    
+
 
     public void FadeToLevel() 
     {
@@ -23,7 +28,8 @@ public class MainMenu : MonoBehaviour
     {
         int SceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneIndex += 1;
-        Debug.Log(SceneIndex);
+        Debug.Log("SceneIndex" + SceneIndex);
+        Debug.Log("controllabe" + PlayerMovement.controllable);
         if (SceneIndex.Equals(2)) {
             PlayerMovement.controllable = true;
         }
