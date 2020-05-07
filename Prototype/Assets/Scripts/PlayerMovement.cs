@@ -1,11 +1,18 @@
-﻿using System.Collections;
+﻿using Spine.Unity;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private LayerMask platformLayerMask;
+
+    public SkeletonAnimation skeletonAnimation;
+    public AnimationReferenceAsset idle, walking, floating, running, jump, jumpfloat;
+    public string currentState;
+    public string currentAnimation;
 
     public float moveSpeed = 5f;
     private Rigidbody2D rb;
@@ -31,12 +38,17 @@ public class PlayerMovement : MonoBehaviour
     float coolingdownCounter = 4;
     bool coolingdown = false;
 
+    public float speed;
+    public float movementx;
+
     private float periodLength = 10; //Seconds
     private float amount = 10; //Amount to add
 
     void Start()
     {
         dashTime = startDashTime;
+        currentState = "Idle";
+        SetCharacterState(currentState);
     }
 
     private void Awake()
@@ -51,9 +63,30 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log("controllable" + controllable);
         //Debug.Log("abilities" + abilities);
         if (controllable == true) {
+            movementx = Input.GetAxis("Horizontal");
+            rb.velocity = new Vector2(movementx * speed, rb.velocity.y);
+
+            if (movementx != 0)
+            {
+                SetCharacterState("Walking");
+                if (movementx > 0)
+                {
+                    transform.localScale = new Vector2(0.5f, 0.5f);
+                }
+                else
+                {
+                    transform.localScale = new Vector2(-0.5f, 0.5f);
+                }
+            }
+            else
+            {
+                SetCharacterState("Idle");
+            }
+            /*
             Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
             transform.position += movement * Time.deltaTime * moveSpeed;
             Physics.gravity = new Vector3(0, 0.0F, 0);
+            */
 
             if (abilities == true) { 
             Dash();
@@ -66,6 +99,28 @@ public class PlayerMovement : MonoBehaviour
             Infoscript.instance.DamageHealthpoints(1);
         }
     } 
+
+    public void SetAnimation(AnimationReferenceAsset animation, bool loop,float timeScale)
+    {
+        if (animation.name.Equals(currentAnimation))
+        {
+            return;
+        }
+        skeletonAnimation.state.SetAnimation(0, animation, loop).TimeScale = timeScale;
+        currentAnimation = animation.name;
+    }
+
+    public void SetCharacterState(string state)
+    {
+        if (state.Equals("Idle"))
+        {
+            SetAnimation(idle, true, 1f);
+        }
+        else if(state.Equals("Walking"))
+        {
+            SetAnimation(walking, true, 0.2f);
+        }
+    }
 
     void Dash() {
         if (direction == 0)
@@ -138,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private bool isGrounded() {
-        float extraHeightText = 0.03f;
+        float extraHeightText = 1f;
         RaycastHit2D raycastHit = Physics2D.Raycast(bc.bounds.center, Vector2.down, bc.bounds.extents.y + extraHeightText, platformLayerMask);
         Color rayColor;
         if (raycastHit.collider != null)

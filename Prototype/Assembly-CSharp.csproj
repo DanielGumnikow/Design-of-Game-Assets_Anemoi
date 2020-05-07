@@ -94,7 +94,7 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
-    <None Include="Assets\Sprites\Player\Game character.atlas.txt" />
+    <None Include="Assets\Animations\Character animations\Game character.atlas.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Daniel/Desktop/Design of Game Assets/Github/Design-of-Game-Assets_Anemoi/Prototype/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
