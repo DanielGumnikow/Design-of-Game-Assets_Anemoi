@@ -242,7 +242,7 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
     }
 
     private bool isGrounded() {
-        float extraHeightText = 1f;
+        float extraHeightText = 0.03f;
         RaycastHit2D raycastHit = Physics2D.Raycast(bc.bounds.center, Vector2.down, bc.bounds.extents.y + extraHeightText, platformLayerMask);
         Color rayColor;
         if (raycastHit.collider != null)
