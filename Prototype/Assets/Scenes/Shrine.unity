@@ -742,7 +742,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636239773}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07dc49db7794af945b72665467486fa6, type: 3}
   m_Name: 
@@ -754,6 +754,7 @@ MonoBehaviour:
     - What is this place?
     - That looks like a shrine.
   button: {fileID: 1426962162}
+  dManager: {fileID: 99030249}
 --- !u!1 &725123102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1255,7 +1256,7 @@ PrefabInstance:
     - target: {fileID: 5980782297500747133, guid: bafc2ffaa5d716b40be83c4b87bb6257,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5980782297500747133, guid: bafc2ffaa5d716b40be83c4b87bb6257,
         type: 3}
@@ -1276,6 +1277,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DialogueTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 5980782297500747135, guid: bafc2ffaa5d716b40be83c4b87bb6257,
+        type: 3}
+      propertyPath: m_AutoTiling
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bafc2ffaa5d716b40be83c4b87bb6257, type: 3}
@@ -1396,7 +1402,7 @@ Transform:
   m_LocalScale: {x: 0.022216493, y: 0.022216493, z: 0.022216493}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1469714474
 MonoBehaviour:
@@ -1731,7 +1737,7 @@ PrefabInstance:
     - target: {fileID: 5980782297500747132, guid: bafc2ffaa5d716b40be83c4b87bb6257,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5980782297500747133, guid: bafc2ffaa5d716b40be83c4b87bb6257,
         type: 3}
@@ -1793,6 +1799,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Start
       objectReference: {fileID: 0}
+    - target: {fileID: 5980782297500747134, guid: bafc2ffaa5d716b40be83c4b87bb6257,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bafc2ffaa5d716b40be83c4b87bb6257, type: 3}
 --- !u!1 &1988954883 stripped
@@ -1818,7 +1829,10 @@ MonoBehaviour:
     trigger: 1
     sentences:
     - Seems I fell down into a cave or something...
+    - What is this place?
+    - That looks like a shrine.
   button: {fileID: 1426962162}
+  dManager: {fileID: 99030249}
 --- !u!1 &1996084262
 GameObject:
   m_ObjectHideFlags: 0
@@ -2003,3 +2017,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &8696600574029745587
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8696600574346072320, guid: 2b8197924b204264c897fc88c6872867,
+        type: 3}
+      propertyPath: m_Name
+      value: Soundcontroller
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696600574346072325, guid: 2b8197924b204264c897fc88c6872867,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 18.331224
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696600574346072325, guid: 2b8197924b204264c897fc88c6872867,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.2976885
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696600574346072325, guid: 2b8197924b204264c897fc88c6872867,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5141147
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696600574346072325, guid: 2b8197924b204264c897fc88c6872867,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696600574346072325, guid: 2b8197924b204264c897fc88c6872867,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696600574346072325, guid: 2b8197924b204264c897fc88c6872867,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696600574346072325, guid: 2b8197924b204264c897fc88c6872867,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696600574346072325, guid: 2b8197924b204264c897fc88c6872867,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696600574346072325, guid: 2b8197924b204264c897fc88c6872867,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696600574346072325, guid: 2b8197924b204264c897fc88c6872867,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696600574346072325, guid: 2b8197924b204264c897fc88c6872867,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2b8197924b204264c897fc88c6872867, type: 3}

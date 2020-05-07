@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
         {
             Destroy(collision.gameObject);
             Infoscript.instance.DamageHealthpoints(1);
+            Soundcontrollerscript.soundInstance.playAudioSource(1);
         }
 
         if (collision.tag == "TriggerEvent")

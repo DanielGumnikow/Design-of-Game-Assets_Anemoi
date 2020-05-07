@@ -102,7 +102,15 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
         {
             if (!currentState.Equals("Jumping") && isGrounded() == true)
             {
-                SetCharacterState("Walking");
+                if (speed > 6)
+                {
+                    SetCharacterState("Running");
+                }
+                else
+                {
+                    SetCharacterState("Walking");
+                }
+                
             }
 
             /*
@@ -190,18 +198,22 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
         if(state.Equals("Walking"))
         {
             SetAnimation(walking, true, 0.2f);
+            Soundcontrollerscript.soundInstance.playAudioSource(4);
         }
         else if (state.Equals("Running"))
         {
-            SetAnimation(running, true, 0.3f);
+            SetAnimation(running, true, 0.4f);
+            Soundcontrollerscript.soundInstance.playAudioSource(5);
         }
         else if (state.Equals("Jumping"))
         {
             SetAnimation(jumping, false, 1f);
+            Soundcontrollerscript.soundInstance.playAudioSource(6);
         }
         else if (state.Equals("Floating"))
         {
             SetAnimation(floating, false, 0.5f);
+            Soundcontrollerscript.soundInstance.playAudioSource(7);
         }
         else
         {

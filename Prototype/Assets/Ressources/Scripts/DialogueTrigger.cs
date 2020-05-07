@@ -6,6 +6,7 @@ public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
     public GameObject button;
+    public DialogueManager dManager;
 
     private void Start()
     {
@@ -26,6 +27,7 @@ public class DialogueTrigger : MonoBehaviour
 
     public void ActivateButton()
     {
+        dManager.DisplayNextSentence();
         button.SetActive(true);
     }
 

@@ -75,6 +75,7 @@
     <Compile Include="Assets\Ressources\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Ressources\Scripts\SoundScript.cs" />
     <Compile Include="Assets\Ressources\Scripts\SpriteChanger.cs" />
+    <Compile Include="Assets\Soundcontrollerscript.cs" />
     <None Include="Assets\Ressources\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\Spine\version.txt" />
     <None Include="Assets\Ressources\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
