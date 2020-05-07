@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 438766442}
   - component: {fileID: 438766441}
   - component: {fileID: 438766440}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Lower Collider Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,6 +646,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 530887890847754637, guid: 1b56b51290be7454c956753a0cbfafb6,
+        type: 3}
+      propertyPath: platformLayerMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 530887890847754637, guid: 1b56b51290be7454c956753a0cbfafb6,
+        type: 3}
+      propertyPath: jumping
+      value: 
+      objectReference: {fileID: 11400000, guid: 84850342b625ee6498226d81d3a8d5fa,
+        type: 2}
+    - target: {fileID: 530887890847754637, guid: 1b56b51290be7454c956753a0cbfafb6,
+        type: 3}
+      propertyPath: jumpspeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 530887890847754642, guid: 1b56b51290be7454c956753a0cbfafb6,
         type: 3}
       propertyPath: m_LocalPosition.x

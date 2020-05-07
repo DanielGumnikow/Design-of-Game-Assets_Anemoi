@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -44,6 +45,10 @@ public class PlayerMovement : MonoBehaviour
     public float movementx;
     public float jumpspeed;
 
+    private int SceneIndex;
+
+    //private bool jumpAllowed = false;
+
     private float periodLength = 10; //Seconds
     private float amount = 10; //Amount to add
 
@@ -52,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         dashTime = startDashTime;
         currentState = "Idle";
         SetCharacterState(currentState);
+        SceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
     private void Awake()
@@ -65,8 +71,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (controllable == true)
         {
+            //Debug.Log(isGrounded()); 
+            //Debug.Log("= SceneIndex = " + SceneIndex + " , " + "isgrounded() = " + isGrounded());
             Move();
-            if (abilities == true)
+            if (abilities == true && isGrounded() == false)
             {       
                 Floating();
             }
@@ -92,9 +100,26 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
 
         if (movementx != 0)
         {
-            if (!currentState.Equals("Jumping"))
+            if (!currentState.Equals("Jumping") && isGrounded() == true)
             {
                 SetCharacterState("Walking");
+            }
+
+            /*
+            if (!currentState.Equals("Jumping") && isGrounded() == true && speed > 5)
+            {
+                SetCharacterState("Running");
+            }
+            */
+            /*
+            else if (!currentState.Equals("Jumping") && isGrounded() == true && SceneIndex > 3) 
+            {
+                SetCharacterState("Running");
+            }
+            */
+            else
+            {
+                SetCharacterState("Floating");
             }
 
             if (movementx > 0)
@@ -108,19 +133,27 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
         }
         else
         {
-            if (!currentState.Equals("Jumping"))
+            if (!currentState.Equals("Jumping") && isGrounded())
             {
                 SetCharacterState("Idle");
             }
+            else
+            {
+                SetCharacterState("Floating");
+            }
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && SceneIndex > 3)
         {
-            Jump();
+            if (isGrounded() == true)
+            {
+                Jump();
+            }
+
         }
     }
 
-    void Jump() //isGrounded() && 
+    void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpspeed);
         if (!currentState.Equals("Jumping"))
@@ -158,6 +191,10 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
         {
             SetAnimation(walking, true, 0.2f);
         }
+        else if (state.Equals("Running"))
+        {
+            SetAnimation(running, true, 0.3f);
+        }
         else if (state.Equals("Jumping"))
         {
             SetAnimation(jumping, false, 1f);
@@ -180,7 +217,7 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
 
     void Floating()
         {
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1") && SceneIndex > 3)
         {
             if (!currentState.Equals("Floating"))
             {

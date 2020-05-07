@@ -3222,7 +3222,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402077938e8401a4bb16ea72dc20d4ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthSprites: []
+  HealthSprites:
+  - {fileID: 21300000, guid: b82c48ae8d44934499c7951d9be1840e, type: 3}
+  - {fileID: 21300000, guid: 4d08a049878230144bb2dfbcd0379fb5, type: 3}
+  - {fileID: 21300000, guid: 48ca46fc67eac3c47b2ae1f9e78e406e, type: 3}
+  - {fileID: 21300000, guid: 14fb0b660ff26364699e6dc9eb6aae02, type: 3}
 --- !u!1001 &1880450632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3233,7 +3237,7 @@ PrefabInstance:
     - target: {fileID: 530887890847754637, guid: 1b56b51290be7454c956753a0cbfafb6,
         type: 3}
       propertyPath: jumpspeed
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 530887890847754637, guid: 1b56b51290be7454c956753a0cbfafb6,
         type: 3}
@@ -3241,6 +3245,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 84850342b625ee6498226d81d3a8d5fa,
         type: 2}
+    - target: {fileID: 530887890847754637, guid: 1b56b51290be7454c956753a0cbfafb6,
+        type: 3}
+      propertyPath: platformLayerMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 530887890847754637, guid: 1b56b51290be7454c956753a0cbfafb6,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 530887890847754637, guid: 1b56b51290be7454c956753a0cbfafb6,
+        type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 530887890847754642, guid: 1b56b51290be7454c956753a0cbfafb6,
         type: 3}
       propertyPath: m_LocalPosition.x

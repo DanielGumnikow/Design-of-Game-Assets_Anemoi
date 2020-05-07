@@ -1085,7 +1085,7 @@ GameObject:
   - component: {fileID: 1531499971}
   - component: {fileID: 1531499970}
   - component: {fileID: 1531499969}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Left barriere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1570,7 +1570,7 @@ GameObject:
   - component: {fileID: 2047755019}
   - component: {fileID: 2047755018}
   - component: {fileID: 2047755017}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Right barriere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1674,6 +1674,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 530887890847754637, guid: 1b56b51290be7454c956753a0cbfafb6,
+        type: 3}
+      propertyPath: platformLayerMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 530887890847754637, guid: 1b56b51290be7454c956753a0cbfafb6,
+        type: 3}
+      propertyPath: jumping
+      value: 
+      objectReference: {fileID: 11400000, guid: 84850342b625ee6498226d81d3a8d5fa,
+        type: 2}
+    - target: {fileID: 530887890847754637, guid: 1b56b51290be7454c956753a0cbfafb6,
+        type: 3}
+      propertyPath: jumpspeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 530887890847754642, guid: 1b56b51290be7454c956753a0cbfafb6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1931,6 +1947,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7050085317313729059, guid: 7f94e25b9562aa747aaab6cc43449d9c,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7050085317313729059, guid: 7f94e25b9562aa747aaab6cc43449d9c,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7050085317313729059, guid: 7f94e25b9562aa747aaab6cc43449d9c,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7050085317313729059, guid: 7f94e25b9562aa747aaab6cc43449d9c,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f94e25b9562aa747aaab6cc43449d9c, type: 3}
