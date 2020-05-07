@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - TriggerEvent
   - DialogueTrigger
+  - BoostFlower
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

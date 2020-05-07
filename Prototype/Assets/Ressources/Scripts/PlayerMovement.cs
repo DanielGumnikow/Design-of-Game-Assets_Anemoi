@@ -222,10 +222,13 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
         currentState = state;
     }
 
-    
 
 
-    
+
+    public void getBoost()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, 10f);
+    }
 
     void Floating()
         {
