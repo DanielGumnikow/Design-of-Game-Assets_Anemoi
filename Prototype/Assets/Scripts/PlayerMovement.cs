@@ -61,6 +61,10 @@ public class PlayerMovement : MonoBehaviour
             Floating();
             }
         }
+        if (Input.GetMouseButtonDown(1)) {
+            //Player.HealthPoints -= 1;
+            Infoscript.instance.DamageHealthpoints(1);
+        }
     } 
 
     void Dash() {
@@ -89,12 +93,12 @@ public class PlayerMovement : MonoBehaviour
 
                 if (direction == 1 && DashValue >= 1)
                 {
-                    Infoscript.instance.UseDash(1);
+                    //Infoscript.instance.UseDash(1);
                     rb.velocity = Vector2.up * dashSpeed;
                 }
                 else if (direction == 2 && DashValue >= 1)
                 {
-                    Infoscript.instance.UseDash(1);
+                    //Infoscript.instance.UseDash(1);
                     rb.velocity = Vector2.right * dashSpeed;
                 }         
             }
@@ -106,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded() && Input.GetButtonDown("Jump"))
         {
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, ((JumpValue*0.01f)* 10f)), ForceMode2D.Impulse);
-            Infoscript.instance.UseStamina(JumpValue);
+            //Infoscript.instance.UseStamina(JumpValue);
             //Infoscript.instance.Use_Stamina(JumpValue, JumpValue, Infoscript.instance.staminaBar, Infoscript.instance.regen , Infoscript.instance.RegenStamina());
 
         }
@@ -117,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             if(FloatValue > 0) { 
-            Infoscript.instance.UseFloat(0.2f);
+            //Infoscript.instance.UseFloat(0.2f);
             rb.gravityScale = 0.1f;
             }
             if (FloatValue < 1)

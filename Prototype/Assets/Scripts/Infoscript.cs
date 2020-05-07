@@ -10,10 +10,14 @@ public class Infoscript : MonoBehaviour
     public Text FloatText;
     public Text JumpText;
 
-    public Slider staminaBar;
-    public Slider FloatBar;
-    public Slider DashBar;
-    public Slider HealthBar;
+    public Sprite NewHealthSprite;
+    public Sprite[] HealthSprites;
+
+
+    private Slider staminaBar;
+    private Slider FloatBar;
+    private Slider DashBar;
+    private Slider HealthBar;
 
     private WaitForSeconds regenTick = new WaitForSeconds(0.01f);
     public Coroutine regen;
@@ -40,20 +44,18 @@ public class Infoscript : MonoBehaviour
     void Start()
     {
         PlayerMovement.JumpValue = PlayerMovement.MaxJumpValue;
-        staminaBar.value = PlayerMovement.MaxJumpValue;
-        staminaBar.value = PlayerMovement.JumpValue;
+        //staminaBar.value = PlayerMovement.MaxJumpValue;
+        //staminaBar.value = PlayerMovement.JumpValue;
 
         PlayerMovement.FloatValue = PlayerMovement.MaxFloatValue;
-        FloatBar.value = PlayerMovement.MaxFloatValue;
-        FloatBar.value = PlayerMovement.FloatValue;
+        //FloatBar.value = PlayerMovement.MaxFloatValue;
+        //FloatBar.value = PlayerMovement.FloatValue;
 
         PlayerMovement.DashValue = PlayerMovement.MaxDashValue;
-        DashBar.value = PlayerMovement.MaxDashValue;
-        DashBar.value = PlayerMovement.DashValue;
+        //DashBar.value = PlayerMovement.MaxDashValue;
+        //DashBar.value = PlayerMovement.DashValue;
 
         Player.HealthPoints = Player.MaxHealthPoints;
-        HealthBar.value = Player.MaxHealthPoints;
-        HealthBar.value = Player.HealthPoints;
 
     }
 
@@ -92,6 +94,7 @@ public class Infoscript : MonoBehaviour
         }
     }
 
+    /*
     public void UseFloat(float amount)
     {
 
@@ -112,7 +115,9 @@ public class Infoscript : MonoBehaviour
             Debug.Log("Not enough FloatStamina");
         }
     }
+    */
 
+        /*
     public void UseDash(float amount)
     {
 
@@ -133,24 +138,39 @@ public class Infoscript : MonoBehaviour
             Debug.Log("Not enough DashStamina");
         }
     }
+    */
 
     public void DamageHealthpoints(int amount)
     {
             Player.HealthPoints -= amount;
-            instance.HealthBar.value = Player.HealthPoints;
+            //instance.HealthBar.value = Player.HealthPoints;
 
-            if (regenHealthPoints != null)
+        if (Player.HealthPoints == 2)
+        {
+            SpriteChanger.changerinstance.changeSprite(Resources.Load<Sprite>("Sprites/UI/Interface Elements/HP_2-of-3"));
+        }
+        else if (Player.HealthPoints == 1)
+        {
+            SpriteChanger.changerinstance.changeSprite(NewHealthSprite);
+        }
+        else if (Player.HealthPoints == 0)
+        {
+            SpriteChanger.changerinstance.changeSprite(NewHealthSprite);
+        }
+
+        /*
+        if (regenHealthPoints != null)
             {
                 StopCoroutine(regenHealthPoints);
             }
 
         regenHealthPoints = StartCoroutine(RegenHealthPoints());
-        
+        */
     }
 
     void Update()
     {
-        JumpText.text = "Jump: " + PlayerMovement.JumpValue;
+        //JumpText.text = "Jump: " + PlayerMovement.JumpValue;
     }
 
 
@@ -189,17 +209,35 @@ public class Infoscript : MonoBehaviour
         }
         instance.regenFloat = null;
     }
+
+    /*
     public IEnumerator RegenHealthPoints()
     {
         yield return new WaitForSeconds(5f);
 
         while (Player.HealthPoints < Player.MaxHealthPoints)
         {
-            Player.HealthPoints += Player.MaxHealthPoints / 100;
+            Player.HealthPoints += Player.MaxHealthPoints / 3;
             instance.HealthBar.value = Player.HealthPoints;
+            if (Player.HealthPoints == 3)
+            {
+                SpriteChanger.changerinstance.changeSprite(HealthSprites[0]);
+            }
+            else if (Player.HealthPoints == 2)
+            {
+                HealthSprite.GetComponent<Image>().sprite = HealthSprites[1];
+            }
+            else if (Player.HealthPoints == 1)
+            {
+                HealthSprite.GetComponent<Image>().sprite = HealthSprites[2];
+            }
+
             yield return instance.regenTickHealthPoints;
+
+
         }
         instance.regenHealthPoints = null;
     }
+    */
 
 }

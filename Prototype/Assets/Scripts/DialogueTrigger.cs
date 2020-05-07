@@ -5,6 +5,7 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
+    public GameObject button;
 
     private void Start()
     {
@@ -21,6 +22,11 @@ public class DialogueTrigger : MonoBehaviour
             dialogue.trigger = false;
             StartCoroutine(TriggerCoroutine());
         }
+    }
+
+    public void ActivateButton()
+    {
+        button.SetActive(true);
     }
 
     public IEnumerator TriggerCoroutine()
