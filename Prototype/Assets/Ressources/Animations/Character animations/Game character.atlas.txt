@@ -1,0 +1,104 @@
+
+Game character.png
+size: 1929,531
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+L1
+  rotate: false
+  xy: 2, 23
+  size: 336, 506
+  orig: 336, 506
+  offset: 0, 0
+  index: -1
+L2
+  rotate: true
+  xy: 1379, 390
+  size: 139, 548
+  orig: 139, 548
+  offset: 0, 0
+  index: -1
+R1
+  rotate: false
+  xy: 340, 23
+  size: 336, 506
+  orig: 336, 506
+  offset: 0, 0
+  index: -1
+R2
+  rotate: true
+  xy: 1379, 249
+  size: 139, 548
+  orig: 139, 548
+  offset: 0, 0
+  index: -1
+cap
+  rotate: false
+  xy: 1079, 225
+  size: 298, 304
+  orig: 298, 304
+  offset: 0, 0
+  index: -1
+dress down
+  rotate: true
+  xy: 678, 149
+  size: 380, 256
+  orig: 380, 256
+  offset: 0, 0
+  index: -1
+dress up
+  rotate: true
+  xy: 1433, 10
+  size: 237, 262
+  orig: 237, 262
+  offset: 0, 0
+  index: -1
+face
+  rotate: true
+  xy: 678, 2
+  size: 145, 265
+  orig: 145, 265
+  offset: 0, 0
+  index: -1
+hand left2
+  rotate: false
+  xy: 936, 211
+  size: 141, 318
+  orig: 141, 318
+  offset: 0, 0
+  index: -1
+hand right
+  rotate: true
+  xy: 1040, 26
+  size: 183, 294
+  orig: 183, 294
+  offset: 0, 0
+  index: -1
+leg left
+  rotate: false
+  xy: 1336, 9
+  size: 95, 214
+  orig: 95, 214
+  offset: 0, 0
+  index: -1
+leg right
+  rotate: true
+  xy: 1697, 152
+  size: 95, 214
+  orig: 95, 214
+  offset: 0, 0
+  index: -1
+us left
+  rotate: false
+  xy: 945, 25
+  size: 93, 184
+  orig: 93, 184
+  offset: 0, 0
+  index: -1
+us right
+  rotate: true
+  xy: 1697, 69
+  size: 81, 183
+  orig: 81, 183
+  offset: 0, 0
+  index: -1
