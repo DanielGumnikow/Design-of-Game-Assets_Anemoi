@@ -9,7 +9,6 @@ TagManager:
   - DialogueTrigger
   - BoostFlower
   - Checkpoint
-  - Killzone
   layers:
   - Default
   - TransparentFX
