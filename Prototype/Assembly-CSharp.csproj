@@ -63,22 +63,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\EventTriggerCustom.cs" />
+    <Compile Include="Assets\NoDestruction.cs" />
+    <Compile Include="Assets\Ressources\Scripts\AnimationManager.cs" />
     <Compile Include="Assets\Ressources\Scripts\Dialogue.cs" />
     <Compile Include="Assets\Ressources\Scripts\DialogueManager.cs" />
     <Compile Include="Assets\Ressources\Scripts\DialogueTrigger.cs" />
     <Compile Include="Assets\Ressources\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Ressources\Scripts\EventTriggerCustom.cs" />
     <Compile Include="Assets\Ressources\Scripts\Infoscript.cs" />
+    <Compile Include="Assets\Ressources\Scripts\LoadMenu.cs" />
     <Compile Include="Assets\Ressources\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Ressources\Scripts\Parallax.cs" />
     <Compile Include="Assets\Ressources\Scripts\Player.cs" />
     <Compile Include="Assets\Ressources\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Ressources\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Ressources\Scripts\SoundScript.cs" />
+    <Compile Include="Assets\Ressources\Scripts\Soundcontrollerscript.cs" />
     <Compile Include="Assets\Ressources\Scripts\SpriteChanger.cs" />
+    <Compile Include="Assets\Ressources\Scripts\quit.cs" />
     <Compile Include="Assets\Scripts\Envoirnment\ParallaxBackground.cs" />
     <Compile Include="Assets\Scripts\Envoirnment\ScrollingBackground.cs" />
-    <Compile Include="Assets\Soundcontrollerscript.cs" />
     <None Include="Assets\Ressources\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\Spine\version.txt" />
     <None Include="Assets\Ressources\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />

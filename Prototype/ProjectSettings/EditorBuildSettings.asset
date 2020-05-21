@@ -18,18 +18,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Shrine.unity
     guid: 6d0ee1faee13e0346a547aad287c3eca
   - enabled: 1
+    path: Assets/Scenes/Tutorial_1.unity
+    guid: e33da7a6d031ed443ae48442672bf503
+  - enabled: 1
+    path: Assets/Scenes/Level_1.1.unity
+    guid: 9ed25d14526f8ae46b5f6a02b2c5f033
+  - enabled: 1
+    path: Assets/Scenes/toBeContinued.unity
+    guid: 2dd1c02919af13641a8ac3cecce41fe5
+  - enabled: 1
+    path: Assets/Scenes/Prototype.unity
+    guid: 2e383f202de4ec54d80296860a0e74bb
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/Autumn Wildlands.unity
-    guid: 97985cddcc89e7848b3e86201168554d
-  - enabled: 1
-    path: Assets/Scenes/Winter Wildlands.unity
-    guid: ea71497bab168304da524f4cac865259
-  - enabled: 1
-    path: Assets/Scenes/Spring Wildlands.unity
-    guid: 8dbf4fc785f257041b8a67c30863c30f
-  - enabled: 1
-    path: Assets/Scenes/Summer Wildlands.unity
-    guid: 575e7059d88b6b044958c93adfee4380
   m_configObjects: {}

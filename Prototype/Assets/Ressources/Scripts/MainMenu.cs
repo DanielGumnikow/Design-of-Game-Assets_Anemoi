@@ -28,8 +28,6 @@ public class MainMenu : MonoBehaviour
     {
         int SceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneIndex += 1;
-        Debug.Log("SceneIndex" + SceneIndex);
-        Debug.Log("controllabe" + PlayerMovement.controllable);
         if (SceneIndex.Equals(2)) {
             PlayerMovement.controllable = true;
         }

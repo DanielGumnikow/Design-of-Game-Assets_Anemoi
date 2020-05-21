@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -9,10 +12,26 @@ public class Player : MonoBehaviour
     //public GameObject[] checkpoints;
     public GameObject lastCheckpoint;
     private Transform PlayerTransform;
+    public static int maxDash = 0;
+    public static int currDash = 0;
+    public GameObject dialogueBoxM;
+    public TextMeshProUGUI collectablesAmount;
+    private int currCollectables = 0;
 
+    public static Player instancePlayer;
+
+    private void Awake()
+    {
+        instancePlayer = this;
+    }
     void Update()
     {
         checkHP();
+    }
+
+    public int getCurrDash()
+    {
+        return currDash;
     }
 
     private void checkHP()
@@ -20,6 +39,15 @@ public class Player : MonoBehaviour
         if (HealthPoints == 0)
         {
             Respawn();
+        }
+    }
+
+    public void addHP()
+    {
+        if (HealthPoints > 0 && HealthPoints < 3)
+        {
+            HealthPoints += 1;
+            Infoscript.instance.UpdateHealthpoints();
         }
     }
 
@@ -33,7 +61,7 @@ public class Player : MonoBehaviour
     {
         fillHP();
         PlayerTransform = GameObject.Find("Player_Animated").transform;
-        PlayerTransform.position = new Vector2(lastCheckpoint.transform.position.x, -2);
+        PlayerTransform.position = new Vector2(lastCheckpoint.transform.position.x, lastCheckpoint.transform.position.y);
         float checkpointPositionX = lastCheckpoint.transform.position.x;
     }
 
@@ -55,8 +83,11 @@ public class Player : MonoBehaviour
         if (collision.tag == "DialogueTrigger")
         {
             DialogueTrigger dTrigger = collision.GetComponent<DialogueTrigger>();
-            dTrigger.TriggerDialogue();
+            dialogueBoxM.SetActive(true);      
+            dTrigger.TriggerDialogue();     
             dTrigger.ActivateButton();
+            dTrigger.DeactivateDialogue();
+
         }
         if (collision.tag == "BoostFlower")
         {
@@ -72,5 +103,34 @@ public class Player : MonoBehaviour
         {
             Respawn();
         }
+        if (collision.tag == "EndGame")
+        {
+            GameObject levelchanger = GameObject.Find("LevelChanger");
+            levelchanger.GetComponent<MainMenu>().FadeToLevel();
+        }
+        if (collision.tag == "HealthItem")
+        {
+            if(HealthPoints < 3)
+            {
+            addHP();
+            Destroy(collision.gameObject);
+            }
+        }
+        if (collision.tag == "Collectable")
+        {
+            currCollectables += 1;
+            collectablesAmount.text = currCollectables + " / 25";
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.tag == "Amulette")
+        {
+            maxDash += 1;
+            currDash += 1;
+            Infoscript.instance.UpdateDashAmulette();
+            Destroy(collision.gameObject);
+        }
+
+
     }
 }

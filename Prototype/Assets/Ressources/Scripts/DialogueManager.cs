@@ -23,7 +23,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue) {
 
         animator.SetBool("isOpen", true);
-        Debug.Log("Starting conversation with " + dialogue.name);
+        //Debug.Log("Starting conversation with " + dialogue.name);
 
         sentences.Clear();
 
@@ -58,7 +58,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue() 
     {
-        Debug.Log("End of Conversation");
+        //Debug.Log("End of Conversation");
         animator.SetBool("isOpen", false);
         MainMenu mM = LevelLoader.GetComponent<MainMenu>();
         mM.FadeToLevel();

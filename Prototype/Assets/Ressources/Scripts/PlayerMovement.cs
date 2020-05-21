@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using UnityEngine.Audio;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -27,16 +28,27 @@ public class PlayerMovement : MonoBehaviour
     public static float MaxDashValue = 2;
     public static float DashValue;
 
+    private bool isDashButtonDownE = false;
+    private bool isDashButtonDownW = false;
+
+    private GameObject pFloat;
+    private GameObject tempObject;
+
+    private WaitForSeconds regenTickDash = new WaitForSeconds(0.02f);
+    public Coroutine regenDash;
+
     public static float MaxFloatValue = 100;
     public static float FloatValue;
 
     public static bool controllable = true;
     public static bool abilities = true;
 
+    private float dashAmount = 1f;
     public float dashSpeed;
     private float dashTime;
     public float startDashTime;
     private int direction;
+
 
     float coolingdownCounter = 4;
     bool coolingdown = false;
@@ -58,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
         currentState = "Idle";
         SetCharacterState(currentState);
         SceneIndex = SceneManager.GetActiveScene().buildIndex;
+        
     }
 
     private void Awake()
@@ -65,19 +78,70 @@ public class PlayerMovement : MonoBehaviour
         Infoscript curr = Infoscript.instance;
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
+        //pFloat = GameObject.FindGameObjectsWithTag("ParticleFloat")[0];
+        //tempObject = pFloat;
+        //tempObject.SetActive(false);
+
     }
 
     void Update()
     {
         if (controllable == true)
         {
+
             //Debug.Log(isGrounded()); 
             //Debug.Log("= SceneIndex = " + SceneIndex + " , " + "isgrounded() = " + isGrounded());
-            Move();
+            
             if (abilities == true && isGrounded() == false)
             {       
                 Floating();
             }
+
+            if (Input.GetKeyDown(KeyCode.E)) { isDashButtonDownE = true; }
+            if (Input.GetKeyDown(KeyCode.W)) { isDashButtonDownW = true; }
+
+            if (isDashButtonDownE && Player.currDash > 0)
+            {
+                if (this.transform.localScale.x > 0)
+                {
+                    rb.velocity = new Vector2(1f * speed * 60f, rb.velocity.y);
+                    Player.currDash -= 1;
+                    Infoscript.instance.UpdateDashAmulette();
+                }
+                else
+                {
+                    rb.velocity = new Vector2(-1f * speed * 60f, rb.velocity.y);
+                    Player.currDash -= 1;
+                    Infoscript.instance.UpdateDashAmulette();
+                    
+                }
+                isDashButtonDownE = false;
+            }
+
+            else if (isDashButtonDownW && Player.currDash > 0)
+            {
+                Debug.Log("W down");
+                //rb.AddForce(transform.forward * 100f);
+                rb.velocity = new Vector2(movementx * speed, 1f * 15f);
+                Player.currDash -= 1;
+                Infoscript.instance.UpdateDashAmulette();
+
+                
+                isDashButtonDownW = false;
+            }
+            else
+            {
+                Move();
+                /*if (regenDash != null)
+                {
+                    StopCoroutine(regenDash);
+                }
+                */
+
+                regenDash = StartCoroutine(RegenDash());
+                //Debug.Log(Player.instancePlayer.getCurrDash());
+            }
+
         }
         
         if (Input.GetMouseButtonDown(1))
@@ -93,10 +157,30 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
 */
     }
 
+
+    public IEnumerator RegenDash()
+    {
+        Debug.Log("nixpassiert");
+        Debug.Log("Maxdash : " + Player.maxDash + " CurrDash : " + Player.currDash);
+
+        yield return new WaitForSeconds(0.2f);
+        Debug.Log("nixpassiert2");
+
+        if (Player.currDash < Player.maxDash)
+        {
+            if (isGrounded()) { 
+            Player.currDash += 1;
+            Infoscript.instance.UpdateDashAmulette();
+            yield return regenTickDash;
+            }
+        }
+        regenDash = null;
+    }
+
     public void Move()
     {
         movementx = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(movementx * speed, rb.velocity.y);
+        rb.velocity = new Vector2(movementx * speed , rb.velocity.y);
 
         if (movementx != 0)
         {
@@ -105,6 +189,7 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
                 if (speed > 6)
                 {
                     SetCharacterState("Running");
+                    
                 }
                 else
                 {
@@ -113,18 +198,6 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
                 
             }
 
-            /*
-            if (!currentState.Equals("Jumping") && isGrounded() == true && speed > 5)
-            {
-                SetCharacterState("Running");
-            }
-            */
-            /*
-            else if (!currentState.Equals("Jumping") && isGrounded() == true && SceneIndex > 3) 
-            {
-                SetCharacterState("Running");
-            }
-            */
             else
             {
                 SetCharacterState("Floating");
@@ -133,6 +206,7 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
             if (movementx > 0)
             {
                 transform.localScale = new Vector2(0.5f, 0.5f);
+
             }
             else
             {
@@ -151,7 +225,7 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
             }
         }
 
-        if (Input.GetButtonDown("Jump") && SceneIndex > 3)
+        if (Input.GetButtonDown("Jump") && SceneIndex > 2)
         {
             if (isGrounded() == true)
             {
@@ -197,33 +271,70 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
         
         if(state.Equals("Walking"))
         {
-            SetAnimation(walking, true, 0.2f);
+            SetAnimation(walking, true, 0.1f);
+            //tempObject.SetActive(false);
+
+            if (Soundcontrollerscript.soundInstance.currAudioSourceIndex != 4)
+            {
+                Soundcontrollerscript.soundInstance.StopAudioSource();
+            }
             Soundcontrollerscript.soundInstance.playAudioSource(4);
+
+
         }
         else if (state.Equals("Running"))
         {
-            SetAnimation(running, true, 0.4f);
+            SetAnimation(running, true, 0.35f);
+            //tempObject.SetActive(false);
+
+            if (Soundcontrollerscript.soundInstance.currAudioSourceIndex != 5)
+            {
+                Soundcontrollerscript.soundInstance.StopAudioSource();
+            }
+
             Soundcontrollerscript.soundInstance.playAudioSource(5);
         }
         else if (state.Equals("Jumping"))
         {
             SetAnimation(jumping, false, 1f);
+            //tempObject.SetActive(false);
+
+            if (Soundcontrollerscript.soundInstance.currAudioSourceIndex != 6)
+            {
+                Soundcontrollerscript.soundInstance.StopAudioSource();
+            }
+
             Soundcontrollerscript.soundInstance.playAudioSource(6);
         }
         else if (state.Equals("Floating"))
-        {
+        {        
             SetAnimation(floating, false, 0.5f);
+
+            //tempObject.SetActive(true);
+
+            if (Soundcontrollerscript.soundInstance.currAudioSourceIndex != 7 && Soundcontrollerscript.soundInstance.currAudioSourceIndex != 6)
+            {
+                Soundcontrollerscript.soundInstance.StopAudioSource();
+            }
+
             Soundcontrollerscript.soundInstance.playAudioSource(7);
+
         }
         else
         {
-            SetAnimation(idle, true, 1f);
+
+            SetAnimation(idle, true, 0.5f);
+            Soundcontrollerscript.soundInstance.StopAudioSource();
+            //tempObject.SetActive(false);
         }
         currentState = state;
     }
 
 
-
+    void Dash() 
+    {
+    
+    }
 
     public void getBoost()
     {
@@ -232,7 +343,7 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
 
     void Floating()
         {
-        if (Input.GetButton("Fire1") && SceneIndex > 3)
+        if (Input.GetButton("Fire1") && SceneIndex > 2)
         {
             if (!currentState.Equals("Floating"))
             {
@@ -240,7 +351,6 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
             }
             SetCharacterState("Floating");
             if (FloatValue > 0) { 
-            //Infoscript.instance.UseFloat(0.2f);
             rb.gravityScale = 0.1f;
             }
             if (FloatValue < 1)
@@ -256,18 +366,26 @@ Physics.gravity = new Vector3(0, 0.0F, 0);
         return Physics2D.Raycast(transform.position, dir, distance).collider == null;
     }
 
+
+
     private bool isGrounded() {
         float extraHeightText = 0.03f;
-        RaycastHit2D raycastHit = Physics2D.Raycast(bc.bounds.center, Vector2.down, bc.bounds.extents.y + extraHeightText, platformLayerMask);
+        //RaycastHit2D raycastHit = Physics2D.Raycast(bc.bounds.center, new Vector2(0,-1), bc.bounds.extents.y + extraHeightText, platformLayerMask);
+        RaycastHit2D raycastHitLeft = Physics2D.Raycast(new Vector2(bc.bounds.center.x - bc.bounds.extents.x, bc.bounds.center.y), new Vector2(0, -1), bc.bounds.extents.y + extraHeightText, platformLayerMask);
+        RaycastHit2D raycastHitRight = Physics2D.Raycast(new Vector2(bc.bounds.center.x + bc.bounds.extents.x, bc.bounds.center.y), new Vector2(0, -1), bc.bounds.extents.y + extraHeightText, platformLayerMask);
         Color rayColor;
-        if (raycastHit.collider != null)
-        {
+        if (raycastHitLeft.collider != null || raycastHitRight.collider != null)
+        //if (raycastHit.collider != null && raycastHitLeft.collider != null && raycastHitRight.collider != null)
+            {
             rayColor = Color.green;
         }
         else {
             rayColor = Color.yellow;
         }
-        Debug.DrawRay(bc.bounds.center, Vector2.down * (bc.bounds.extents.y + extraHeightText), rayColor);
-        return raycastHit.collider != null;
+        //Debug.DrawRay(bc.bounds.center, Vector2.down * (bc.bounds.extents.y + extraHeightText), rayColor);
+        Debug.DrawRay(new Vector2(bc.bounds.center.x + bc.bounds.extents.x, bc.bounds.center.y), Vector2.down * (bc.bounds.extents.y + extraHeightText), rayColor);
+        Debug.DrawRay(new Vector2(bc.bounds.center.x - bc.bounds.extents.x, bc.bounds.center.y), Vector2.down * (bc.bounds.extents.y + extraHeightText), rayColor);
+        //return raycastHit.collider != null && raycastHitLeft.collider != null && raycastHitRight.collider != null;
+        return raycastHitLeft.collider != null || raycastHitRight.collider != null;
     }
 }

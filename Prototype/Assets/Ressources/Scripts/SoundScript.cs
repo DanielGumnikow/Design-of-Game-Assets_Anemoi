@@ -30,10 +30,19 @@ public class SoundScript : MonoBehaviour
         soundmanager.ToggleSound();
     }
 
-    public void setVolume(float volume)
+    public void setVolume(float volume) // Sets the Volume of the Global Main Mix
     {
+        if (volume == -25)
+        {
+            audioMixer.SetFloat("volume", -80);
+            volumetext.text = "Volume 0";
+        }
+        else 
+        { 
         audioMixer.SetFloat("volume", volume);
-        volumetext.text = "Volume " + MapRange(volume, -80f, 0f, 0f, 100f);
+        volumetext.text = "Volume " + MapRange(volume, -25f, 0f, 0f, 100f);
+        }
+
     }
 
     public float MapRange(float x, float in_min, float in_max, float out_min, float out_max)

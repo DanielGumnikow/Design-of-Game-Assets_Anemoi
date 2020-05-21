@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
     public GameObject button;
+    public GameObject dialogueboxM;
     public DialogueManager dManager;
+    private int SceneIndex;
 
     private void Start()
     {
+        SceneIndex = SceneManager.GetActiveScene().buildIndex;
         //TriggerDialogue();
     }
     public void TriggerDialogue()
@@ -28,8 +32,27 @@ public class DialogueTrigger : MonoBehaviour
     public void ActivateButton()
     {
         dManager.DisplayNextSentence();
-        button.SetActive(true);
+
+        if (SceneIndex < 4)
+        {
+            button.SetActive(true);
+        }
+
     }
+
+    public IEnumerator TriggerCoroutineOff()
+    {
+        yield return new WaitForSeconds(3f);
+        dialogueboxM.SetActive(false);
+    }
+
+    public void DeactivateDialogue()
+    {
+        StartCoroutine(TriggerCoroutineOff());
+        
+
+    }
+
 
     public IEnumerator TriggerCoroutine()
     {

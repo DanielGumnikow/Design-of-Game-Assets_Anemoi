@@ -10,6 +10,12 @@ TagManager:
   - BoostFlower
   - Checkpoint
   - Killzone
+  - EndGame
+  - HealthItem
+  - Collectable
+  - Amulette
+  - ParticleDash
+  - ParticleFloat
   layers:
   - Default
   - TransparentFX
@@ -31,9 +37,9 @@ TagManager:
   - 
   - 
   - 
+  - Minimap
   - 
-  - 
-  - 
+  - CollectablesMap
   - 
   - 
   - 
@@ -46,4 +52,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Front
+    uniqueID: 1234219711
     locked: 0

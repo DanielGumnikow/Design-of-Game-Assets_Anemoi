@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Infoscript : MonoBehaviour
 {
     public Sprite[] HealthSprites;
+    public Sprite[] AmuletteSprites;
 
     private Sprite tempSprite;
     
@@ -29,7 +30,9 @@ public class Infoscript : MonoBehaviour
 
     public static Infoscript instance;
 
+    public Animator HealthSprite;
 
+    private GameObject amuletteref;
     private void Awake()
     {
 
@@ -52,6 +55,8 @@ public class Infoscript : MonoBehaviour
         //DashBar.value = PlayerMovement.DashValue;
 
         Player.HealthPoints = Player.MaxHealthPoints;
+
+        amuletteref = GameObject.Find("amulette");
 
     }
 
@@ -136,32 +141,67 @@ public class Infoscript : MonoBehaviour
     }
     */
 
+    public void AnimationEnded() 
+    {
+        HealthSprite.SetBool("playState1", false);
+    }
+
+    
+
+
+
     public void DamageHealthpoints(int amount)
     {
             Player.HealthPoints -= amount;
-            //instance.HealthBar.value = Player.HealthPoints;
+            UpdateHealthpoints();
+    }
 
-        if (Player.HealthPoints == 2)
+    public void UpdateHealthpoints()
+    {
+        if (Player.HealthPoints == 3)
+        {
+            SpriteChanger.changerinstance.changeSprite(HealthSprites[0]);
+            HealthSprite.SetBool("playState1", true);
+        }
+        else if (Player.HealthPoints == 2)
         {
             SpriteChanger.changerinstance.changeSprite(HealthSprites[1]);
+            HealthSprite.SetBool("playState1", true);
         }
         else if (Player.HealthPoints == 1)
         {
             SpriteChanger.changerinstance.changeSprite(HealthSprites[2]);
+            HealthSprite.SetBool("playState1", true);
         }
         else if (Player.HealthPoints == 0)
         {
             SpriteChanger.changerinstance.changeSprite(HealthSprites[3]);
+            HealthSprite.SetBool("playState1", true);
         }
+    }
 
-        /*
-        if (regenHealthPoints != null)
-            {
-                StopCoroutine(regenHealthPoints);
-            }
-
-        regenHealthPoints = StartCoroutine(RegenHealthPoints());
-        */
+    public void UpdateDashAmulette()
+    {
+        if (Player.currDash == 3)
+        {
+            amuletteref.GetComponent<SpriteChanger>().changeSprite(AmuletteSprites[3]);
+            amuletteref.GetComponent<Animator>().SetBool("playState1", true);
+        }
+        else if (Player.currDash == 2)
+        {
+            amuletteref.GetComponent<SpriteChanger>().changeSprite(AmuletteSprites[2]);
+            amuletteref.GetComponent<Animator>().SetBool("playState1", true);
+        }
+        else if (Player.currDash == 1)
+        {
+            amuletteref.GetComponent<SpriteChanger>().changeSprite(AmuletteSprites[1]);
+            amuletteref.GetComponent<Animator>().SetBool("playState1", true);
+        }
+        else if (Player.currDash == 0)
+        {
+            amuletteref.GetComponent<SpriteChanger>().changeSprite(AmuletteSprites[0]);
+            amuletteref.GetComponent<Animator>().SetBool("playState1", true);
+        }
     }
 
     void Update()
@@ -183,12 +223,13 @@ public class Infoscript : MonoBehaviour
     }
     public IEnumerator RegenDash()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
+        Debug.Log("nixpassiert");
 
-        while (PlayerMovement.DashValue < PlayerMovement.MaxDashValue)
+        while (Player.currDash < Player.maxDash)
         {
-            PlayerMovement.DashValue += PlayerMovement.MaxDashValue / 100;
-            instance.DashBar.value = PlayerMovement.DashValue;
+            Player.currDash += Player.maxDash / 3;
+            instance.UpdateDashAmulette();
             yield return instance.regenTickDash;
         }
         instance.regenDash = null;
@@ -197,6 +238,7 @@ public class Infoscript : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
+        
         while (PlayerMovement.FloatValue < PlayerMovement.MaxFloatValue)
         {
             PlayerMovement.FloatValue += PlayerMovement.MaxFloatValue / 100;

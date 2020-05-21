@@ -6,11 +6,15 @@ using UnityEngine.UI;
 public class SpriteChanger : MonoBehaviour
 {
 
-    public GameObject HealthImage;
+    public GameObject defaultSprite;
     public static SpriteChanger changerinstance;
     //private SpriteRenderer spriteR;
     private Sprite[] sprites;
 
+    public Sprite btn_Image;
+    public Sprite btn_HL_Image;
+
+    public GameObject amuletteref;
     private void Awake()
     {
 
@@ -20,6 +24,7 @@ public class SpriteChanger : MonoBehaviour
 
     private void Start()
     {
+        //changeHLSprite();
         //spriteR = gameObject.GetComponent<SpriteRenderer>();
         //sprites = Resources.LoadAll<Sprite>("");
         //HealthImage.sprite = gameObject.GetComponent<SpriteRenderer>();
@@ -28,6 +33,11 @@ public class SpriteChanger : MonoBehaviour
     public void changeSprite(Sprite otherSprite)
     {
         //spriteR.sprite = otherSprite;
-        HealthImage.GetComponent<SpriteRenderer>().sprite = otherSprite;
+        defaultSprite.GetComponent<SpriteRenderer>().sprite = otherSprite;
+    }
+
+    public void AnimationEndedAmulette()
+    {
+        amuletteref.GetComponent<Animator>().SetBool("playState1", false);
     }
 }
