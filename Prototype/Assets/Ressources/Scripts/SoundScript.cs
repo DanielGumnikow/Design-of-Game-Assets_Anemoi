@@ -13,13 +13,15 @@ public class SoundScript : MonoBehaviour
 
     public AudioMixer audioMixer;
 
-    // Start is called before the first frame update
+    private float globalvolume;
+
+
     void Start()
     {
         soundmanager = GameObject.FindObjectOfType<SoundManager>();
+        setSliderVolume();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -36,13 +38,34 @@ public class SoundScript : MonoBehaviour
         {
             audioMixer.SetFloat("volume", -80);
             volumetext.text = "Volume 0";
+            globalvolume = volume;
         }
         else 
         { 
         audioMixer.SetFloat("volume", volume);
-        volumetext.text = "Volume " + MapRange(volume, -25f, 0f, 0f, 100f);
+            volumetext.text = "Volume " + MapRange(volume, -25f, 0f, 0f, 100f);
+            globalvolume = volume;
+
         }
 
+    }
+
+    public void setSliderVolume()
+    { 
+        audioMixer.GetFloat("volume", out globalvolume);
+        soundslider.value = globalvolume;
+    }
+
+    public void setMute()
+    {
+        audioMixer.GetFloat("volume", out globalvolume);
+        audioMixer.SetFloat("volume", -80);
+
+    }
+
+    public void setUnmute() 
+    {
+        audioMixer.SetFloat("volume", globalvolume);
     }
 
     public float MapRange(float x, float in_min, float in_max, float out_min, float out_max)

@@ -7,7 +7,12 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public Animator animator;
+    Soundcontrollerscript soundController;
 
+    private void Start()
+    {
+        soundController = GameObject.Find("Soundcontroller").GetComponent<Soundcontrollerscript>();
+    }
 
     public void SceneLoad(int Scene_Number)
     {
@@ -41,12 +46,28 @@ public class MainMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        /*if (Input.GetKeyDown(KeyCode.C))
         {
             FadeToLevel();
         }
+        */
     }
 
+    public void stopOnPause()
+    {
+        soundController.StopAudioSource();
+    }
+
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+    }
     public void Quit()
     {
         //If we are running in a standalone build of the game

@@ -9,12 +9,11 @@ public class Infoscript : MonoBehaviour
     public Sprite[] HealthSprites;
     public Sprite[] AmuletteSprites;
 
-    private Sprite tempSprite;
+    public GameObject HealtSpriteUI;
+    public GameObject AmuletteSpriteUI;
     
     private Slider staminaBar;
     private Slider FloatBar;
-    private Slider DashBar;
-    private Slider HealthBar;
 
     private WaitForSeconds regenTick = new WaitForSeconds(0.01f);
     public Coroutine regen;
@@ -32,7 +31,6 @@ public class Infoscript : MonoBehaviour
 
     public Animator HealthSprite;
 
-    private GameObject amuletteref;
     private void Awake()
     {
 
@@ -56,7 +54,6 @@ public class Infoscript : MonoBehaviour
 
         Player.HealthPoints = Player.MaxHealthPoints;
 
-        amuletteref = GameObject.Find("amulette");
 
     }
 
@@ -74,7 +71,7 @@ public class Infoscript : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough JUMPStamina");
+            //Debug.Log("Not enough JUMPStamina");
         }
     }
 
@@ -91,7 +88,7 @@ public class Infoscript : MonoBehaviour
             regen = StartCoroutine(RegenStamina());       
         }
         else {
-            Debug.Log("Not enough JUMPStamina");
+            //Debug.Log("Not enough JUMPStamina");
         }
     }
 
@@ -160,47 +157,53 @@ public class Infoscript : MonoBehaviour
     {
         if (Player.HealthPoints == 3)
         {
-            SpriteChanger.changerinstance.changeSprite(HealthSprites[0]);
-            HealthSprite.SetBool("playState1", true);
+            HealtSpriteUI.GetComponent<SpriteRenderer>().sprite = HealthSprites[0];
+            HealtSpriteUI.GetComponent<Animator>().SetBool("playState1", true);
         }
         else if (Player.HealthPoints == 2)
         {
-            SpriteChanger.changerinstance.changeSprite(HealthSprites[1]);
-            HealthSprite.SetBool("playState1", true);
+            HealtSpriteUI.GetComponent<SpriteRenderer>().sprite = HealthSprites[1];
+            HealtSpriteUI.GetComponent<Animator>().SetBool("playState1", true);
         }
         else if (Player.HealthPoints == 1)
         {
-            SpriteChanger.changerinstance.changeSprite(HealthSprites[2]);
-            HealthSprite.SetBool("playState1", true);
+            HealtSpriteUI.GetComponent<SpriteRenderer>().sprite = HealthSprites[2];
+            HealtSpriteUI.GetComponent<Animator>().SetBool("playState1", true);
         }
         else if (Player.HealthPoints == 0)
         {
-            SpriteChanger.changerinstance.changeSprite(HealthSprites[3]);
-            HealthSprite.SetBool("playState1", true);
+            HealtSpriteUI.GetComponent<SpriteRenderer>().sprite = HealthSprites[3];
+            HealtSpriteUI.GetComponent<Animator>().SetBool("playState1", true);
         }
     }
 
     public void UpdateDashAmulette()
     {
-        if (Player.currDash == 3)
+        if (AmuletteSpriteUI != null) {
+        if (Player.instancePlayer.currDash == 3)
         {
-            amuletteref.GetComponent<SpriteChanger>().changeSprite(AmuletteSprites[3]);
-            amuletteref.GetComponent<Animator>().SetBool("playState1", true);
+            AmuletteSpriteUI.GetComponent<SpriteRenderer>().sprite = AmuletteSprites[3];
+            AmuletteSpriteUI.GetComponent<Animator>().SetBool("playState1", true);
         }
-        else if (Player.currDash == 2)
+        else if (Player.instancePlayer.currDash == 2)
         {
-            amuletteref.GetComponent<SpriteChanger>().changeSprite(AmuletteSprites[2]);
-            amuletteref.GetComponent<Animator>().SetBool("playState1", true);
+            AmuletteSpriteUI.GetComponent<SpriteRenderer>().sprite = AmuletteSprites[2];
+            AmuletteSpriteUI.GetComponent<Animator>().SetBool("playState1", true);
         }
-        else if (Player.currDash == 1)
+        else if (Player.instancePlayer.currDash == 1)
         {
-            amuletteref.GetComponent<SpriteChanger>().changeSprite(AmuletteSprites[1]);
-            amuletteref.GetComponent<Animator>().SetBool("playState1", true);
+            AmuletteSpriteUI.GetComponent<SpriteRenderer>().sprite =  AmuletteSprites[1];
+            AmuletteSpriteUI.GetComponent<Animator>().SetBool("playState1", true);
         }
-        else if (Player.currDash == 0)
+        else if (Player.instancePlayer.currDash == 0)
         {
-            amuletteref.GetComponent<SpriteChanger>().changeSprite(AmuletteSprites[0]);
-            amuletteref.GetComponent<Animator>().SetBool("playState1", true);
+            AmuletteSpriteUI.GetComponent<SpriteRenderer>().sprite = AmuletteSprites[0];
+            AmuletteSpriteUI.GetComponent<Animator>().SetBool("playState1", true);
+        }
+        }
+        else
+        {
+            // no Amulette
         }
     }
 
@@ -224,11 +227,11 @@ public class Infoscript : MonoBehaviour
     public IEnumerator RegenDash()
     {
         yield return new WaitForSeconds(0.2f);
-        Debug.Log("nixpassiert");
+        //Debug.Log("nixpassiert");
 
-        while (Player.currDash < Player.maxDash)
+        while (Player.instancePlayer.currDash < Player.instancePlayer.maxDash)
         {
-            Player.currDash += Player.maxDash / 3;
+            Player.instancePlayer.currDash += Player.instancePlayer.maxDash / 3;
             instance.UpdateDashAmulette();
             yield return instance.regenTickDash;
         }

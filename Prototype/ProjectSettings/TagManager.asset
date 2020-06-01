@@ -16,6 +16,9 @@ TagManager:
   - Amulette
   - ParticleDash
   - ParticleFloat
+  - BossSoul
+  - Projectile
+  - DeactivateObject
   layers:
   - Default
   - TransparentFX
@@ -53,6 +56,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Front
+  - name: Background
+    uniqueID: 2125180505
+    locked: 0
+  - name: Level
     uniqueID: 1234219711
+    locked: 0
+  - name: Player
+    uniqueID: 1488725839
+    locked: 0
+  - name: ForeGround
+    uniqueID: 1407396083
+    locked: 0
+  - name: UI
+    uniqueID: 1208366121
     locked: 0
