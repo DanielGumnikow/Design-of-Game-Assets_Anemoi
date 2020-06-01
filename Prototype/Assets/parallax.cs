@@ -15,7 +15,7 @@ public class parallax : MonoBehaviour
     GameObject player;
     PlayerMovement playerMovement;
 
-    private float tempX;
+    private float startX;
 
     private void Start()
     {
@@ -24,12 +24,23 @@ public class parallax : MonoBehaviour
         player = GameObject.Find("Player_Animated");
         playerMovement = player.GetComponent<PlayerMovement>();
         playerRigidBody = player.GetComponent<Rigidbody2D>();
-        tempX = player.transform.position.x;
+        startX = player.transform.position.x;
+
     }
     private void Update()
     {
         
         float tempY = virtualCam.transform.position.y;
+        if (playerRigidBody.velocity.x != 0) {
+        offset = (startX - player.transform.position.x) * speed * 5;
+        transform.position = new Vector2(transform.position.x + offset, transform.position.y);
+        }
+        startX = player.transform.position.x;
+
+    }
+
+    /*
+     *  float tempY = virtualCam.transform.position.y;
        //playerRigidBody.;
         if (playerRigidBody.velocity.x != 0 && tempX != player.transform.position.x) {
         offset = playerRigidBody.velocity.x * speed * -0.1f;
@@ -38,6 +49,7 @@ public class parallax : MonoBehaviour
         transform.position = new Vector2(transform.position.x + offset, transform.position.y);
         }
         tempX = player.transform.position.x;
-
-    }
+     * 
+     * 
+     * */
 }

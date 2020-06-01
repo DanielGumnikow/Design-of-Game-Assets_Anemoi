@@ -463,7 +463,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.DrawRay(new Vector2(bc.bounds.center.x + bc.bounds.extents.x, bc.bounds.center.y), Vector2.down * (bc.bounds.extents.y + extraHeightText), rayColor);
             Debug.DrawRay(new Vector2(bc.bounds.center.x - bc.bounds.extents.x, bc.bounds.center.y), Vector2.down * (bc.bounds.extents.y + extraHeightText), rayColor);
         //return raycastHit.collider != null && raycastHitLeft.collider != null && raycastHitRight.collider != null;
-        Debug.Log("timeGrounded" + timeGrounded);
+        //Debug.Log("timeGrounded" + timeGrounded);
         return raycastHitLeft.collider != null || raycastHitRight.collider != null;
         }
 
