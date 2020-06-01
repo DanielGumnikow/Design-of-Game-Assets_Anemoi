@@ -32,7 +32,7 @@ public class parallax : MonoBehaviour
         
         float tempY = virtualCam.transform.position.y;
         if (playerRigidBody.velocity.x != 0) {
-        offset = (startX - player.transform.position.x) * speed * 5;
+        offset = (startX - player.transform.position.x) * speed * 2;
         transform.position = new Vector2(transform.position.x + offset, transform.position.y);
         }
         startX = player.transform.position.x;

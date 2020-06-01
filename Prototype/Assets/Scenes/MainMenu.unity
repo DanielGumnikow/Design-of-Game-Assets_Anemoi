@@ -3604,6 +3604,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelChanger
       objectReference: {fileID: 0}
+    - target: {fileID: 8370532787223377412, guid: 827170f76f0c3f0499834b8548d8c110,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8370532787223377413, guid: 827170f76f0c3f0499834b8548d8c110,
         type: 3}
       propertyPath: m_LocalPosition.x
